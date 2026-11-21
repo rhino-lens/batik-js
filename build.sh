@@ -10,6 +10,9 @@
 # 1.4.2_12's rt.jar. Both give byte-identical classes.
 #
 # Output: out/batik-js-lens-1.7.jar, byte-identical to batik-js-1.7.jar (the build fails otherwise)
+#
+# MODE=report keeps the same recipe but only lists entries that differ from batik-js-1.7.jar,
+# for work that changes Rhino on purpose. See RECIPE.md for every detail of the recipe.
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -43,4 +46,5 @@ find src toolsrc xmlimplsrc deprecatedsrc -name '*.java' | sort > "$OUT/files.tx
 javac142 -nowarn -g:none -source 1.3 -target 1.3 \
   -classpath "$XMLBEANS:$STAX" -d "$CLASSES" @"$OUT/files.txt"
 
-python3 -I provenance/package_and_verify.py . "$CLASSES" "$OUT/batik-js-lens-1.7.jar" "$REFERENCE"
+REPORT=(); [ "${MODE:-verify}" = report ] && REPORT=(--report)
+python3 -I provenance/package_and_verify.py "${REPORT[@]+"${REPORT[@]}"}" . "$CLASSES" "$OUT/batik-js-lens-1.7.jar" "$REFERENCE"

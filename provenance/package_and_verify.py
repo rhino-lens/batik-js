@@ -21,7 +21,10 @@ The jar is written the way Ant 1.7.0's <jar> task wrote batik-js-1.7.jar:
 
 The result is compared with the reference jar entry by entry and as a whole file.
 
-Usage: package_and_verify.py <repo-root> <classes-dir> <out-jar> [reference-jar]
+Usage: package_and_verify.py [--report] <repo-root> <classes-dir> <out-jar> [reference-jar]
+
+Without --report the script exits 1 unless the jar is identical to the reference (the 1.7
+baseline). With --report it only lists what differs, for builds that change Rhino on purpose.
 """
 import hashlib, os, re, struct, sys, zipfile, zlib
 
@@ -37,8 +40,11 @@ STAGE_SECONDS = {"src": 22, "toolsrc": 24, "xmlimplsrc": 24, "deprecatedsrc": 24
 MANIFEST_SECONDS, META_INF_SECONDS = 24, 26
 SOURCE_DIRS = ("src", "toolsrc", "xmlimplsrc", "deprecatedsrc")
 
-root, classes, out_jar = sys.argv[1:4]
-reference = sys.argv[4] if len(sys.argv) > 4 else None
+args = sys.argv[1:]
+report_only = "--report" in args
+args = [a for a in args if a != "--report"]
+root, classes, out_jar = args[0:3]
+reference = args[3] if len(args) > 3 else None
 
 
 def source_dir_of_class(name):
@@ -151,4 +157,4 @@ if reference:
     whole = out == ref_bytes
     print("whole jar file:", "IDENTICAL (sha1 %s)" % sha1 if whole
           else "differs from reference (sha1 %s)" % hashlib.sha1(ref_bytes).hexdigest())
-    sys.exit(0 if whole else 1)
+    sys.exit(0 if whole or report_only else 1)

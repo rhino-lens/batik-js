@@ -37,6 +37,8 @@ The script engine (`org.mozilla.javascript` and its subpackages, except the debu
 
 ## Build it yourself
 
+Every detail that makes the jar identical, and why, is in [`RECIPE.md`](RECIPE.md).
+
 You need Sun J2SDK **1.4.2_12** (the jar's manifest says `Created-By: 1.4.2_12-b03`) from the Oracle Java SE archive, plus `python3` and `curl`.
 
 ```sh
