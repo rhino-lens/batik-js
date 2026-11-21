@@ -22,7 +22,7 @@ It replaces `org.apache.xmlgraphics:batik-js:1.7`. Remove that dependency (or ex
 |---|---|
 | The jar is Batik's | [`lib/js.jar`](https://github.com/apache/xmlgraphics-batik/blob/batik-1_7/lib/js.jar) at Batik tag `batik-1_7` (last changed in commit [`de8efc1b`](https://github.com/apache/xmlgraphics-batik/commit/de8efc1bfddfaae5f180a0a790eade82ccd1c6a7)) is byte-identical to `batik-js-1.7.jar` on Maven Central (SHA-1 `688eb1bf13b7a54491fcb3405068fc5092589884`). |
 | The source is Rhino trunk `e53fc732` | Batik's [`README.js.txt`](provenance/batik-1.7-README.js.txt) says to check out Rhino with `cvs co -D2006-11-20`. That is trunk, not the 1.6R5 release tag: the jar has `Context.reportWarning(String, Throwable)`, which the tag lacks. The last trunk commit before that date is [`e53fc732`](https://github.com/mozilla/rhino/commit/e53fc732eceaff572c3002c88992dcdc7c529531). |
-| Every entry matches | Built as below, this repository produces all **269** classes and **3** resource files of the jar, **byte-identical** (compared entry by entry). Only the manifest is new. |
+| The whole jar matches | Built as below, this repository produces a jar that is **byte-identical to `batik-js-1.7.jar` as a whole file** (same SHA-1, `688eb1bf…`): all **269** classes, **3** resource files, the manifest, and the zip layout itself. |
 
 ## What differs from plain Rhino trunk
 
@@ -43,7 +43,7 @@ You need Sun J2SDK **1.4.2_12** (the jar's manifest says `Created-By: 1.4.2_12-b
 JDK142=/path/to/j2sdk1.4.2_12 ./build.sh
 ```
 
-[`build.sh`](build.sh) downloads `xmlbeans-2.3.0.jar` and `stax-api-1.0.1.jar` (for E4X) and the reference `batik-js-1.7.jar` from Maven Central, checking each SHA-1. It then compiles, writes `out/batik-js-lens-1.7.jar`, and compares every entry with the reference jar. The compile step is:
+[`build.sh`](build.sh) downloads `xmlbeans-2.3.0.jar` and `stax-api-1.0.1.jar` (for E4X) and the reference `batik-js-1.7.jar` from Maven Central, checking each SHA-1. It then compiles, writes `out/batik-js-lens-1.7.jar`, and checks that it is identical to the reference jar, entry by entry and as a whole file. The compile step is:
 
 ```sh
 find src toolsrc xmlimplsrc deprecatedsrc -name '*.java' > files.txt
@@ -54,7 +54,9 @@ $JDK142/bin/javac -nowarn -g:none -source 1.3 -target 1.3 \
 
 **Not on Linux x86?** The JDK 1.4.2_12 compiler is Java code in `tools.jar`, and its output does not depend on the JVM running it. Set `HOST_JAVA` to any Java 9+ `java` and `build.sh` runs that compiler on it, against 1.4.2_12's `rt.jar`. The classes come out byte-identical. One catch: Sun's installer ships `tools.jar` and `rt.jar` in an early pack format (3.0) that only its bundled Linux `lib/unpack` can expand, so the JDK has to be installed once on Linux x86 (a VM or container is enough).
 
-**Resources.** Rhino's Ant build copied `src/**/*.properties` through a filter that set `implementation.version` to `Rhino 1.6 release 6 Pre 2007 11 13` and, reading the files as UTF-8, turned each Latin-1 non-breaking space in `Messages_fr.properties` into U+FFFD. [`provenance/package_and_verify.py`](provenance/package_and_verify.py) reproduces both, so the resources match Batik's byte for byte. The jar itself is reproducible: fixed timestamps, sorted entries.
+**Resources.** Rhino's Ant build copied `src/**/*.properties` through a filter that set `implementation.version` to `Rhino 1.6 release 6 Pre 2007 11 13` and, reading the files as UTF-8, turned each Latin-1 non-breaking space in `Messages_fr.properties` into U+FFFD. [`provenance/package_and_verify.py`](provenance/package_and_verify.py) reproduces both, so the resources match Batik's byte for byte.
+
+**The jar file.** The same script writes the jar the way Ant 1.7.0 did: the original manifest text, directories first, entries sorted, Java's `0xCAFE` jar marker, Ant's zip header fields, and zlib level-6 compression (which still produces the same bytes today). Entry times are Batik's build times, 2007-11-13 21:51, set by build step: `src/` at :22; `toolsrc/`, `xmlimplsrc/`, `deprecatedsrc/` and the manifest at :24; `META-INF/` at :26. `build.sh` fails unless the finished jar's SHA-1 equals `688eb1bf13b7a54491fcb3405068fc5092589884`.
 
 ## License
 

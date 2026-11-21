@@ -9,7 +9,7 @@
 # Java 9+ `java`: the 1.4.2_12 compiler (tools.jar) then runs on it, compiling against
 # 1.4.2_12's rt.jar. Both give byte-identical classes.
 #
-# Output: out/batik-js-lens-1.7.jar
+# Output: out/batik-js-lens-1.7.jar, byte-identical to batik-js-1.7.jar (the build fails otherwise)
 set -euo pipefail
 cd "$(dirname "$0")"
 
