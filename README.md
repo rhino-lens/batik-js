@@ -6,6 +6,8 @@ The exact Mozilla Rhino JavaScript engine shipped in Apache Batik 1.7 (`org.apac
 
 ## Use it
 
+On [Maven Central](https://central.sonatype.com/artifact/io.github.rhino-lens/batik-js-lens-base) (tag [`v1.7`](https://github.com/rhino-lens/batik-js-lens-base/releases/tag/v1.7)):
+
 ```xml
 <dependency>
   <groupId>io.github.rhino-lens</groupId>
