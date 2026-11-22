@@ -1,4 +1,4 @@
-# batik-js-lens-base
+# batik-js
 
 The exact Mozilla Rhino JavaScript engine shipped in Apache Batik 1.7 (`org.apache.xmlgraphics:batik-js:1.7`), rebuilt from public source and published under `io.github.rhino-lens`.
 
@@ -6,17 +6,17 @@ The exact Mozilla Rhino JavaScript engine shipped in Apache Batik 1.7 (`org.apac
 
 ## Use it
 
-On [Maven Central](https://central.sonatype.com/artifact/io.github.rhino-lens/batik-js-lens-base) (tag [`v1.7`](https://github.com/rhino-lens/batik-js-lens-base/releases/tag/v1.7)):
+On [Maven Central](https://central.sonatype.com/artifact/io.github.rhino-lens/batik-js):
 
 ```xml
 <dependency>
   <groupId>io.github.rhino-lens</groupId>
-  <artifactId>batik-js-lens-base</artifactId>
+  <artifactId>batik-js</artifactId>
   <version>1.7</version>
 </dependency>
 ```
 
-It replaces `org.apache.xmlgraphics:batik-js:1.7`. Remove that dependency (or exclude it where another library pulls it in) so only one copy of `org.mozilla.javascript` is on the classpath. The Java package is unchanged, so no code changes are needed.
+It is the same jar as `org.apache.xmlgraphics:batik-js:1.7`, under the `io.github.rhino-lens` group. (It was first published as `io.github.rhino-lens:batik-js-lens-base:1.7`; that name now points here.) Use one or the other, not both: remove Apache's dependency (or exclude it where another library pulls it in) so only one copy of `org.mozilla.javascript` is on the classpath. The Java package is unchanged, so no code changes are needed.
 
 ## Proof it is identical
 
@@ -47,7 +47,7 @@ You need Sun J2SDK **1.4.2_12** (the jar's manifest says `Created-By: 1.4.2_12-b
 JDK142=/path/to/j2sdk1.4.2_12 ./build.sh
 ```
 
-[`build.sh`](build.sh) downloads `xmlbeans-2.3.0.jar` and `stax-api-1.0.1.jar` (for E4X) and the reference `batik-js-1.7.jar` from Maven Central, checking each SHA-1. It then compiles, writes `out/batik-js-lens-base-1.7.jar`, and checks that it is identical to the reference jar, entry by entry and as a whole file. The compile step is:
+[`build.sh`](build.sh) downloads `xmlbeans-2.3.0.jar` and `stax-api-1.0.1.jar` (for E4X) and the reference `batik-js-1.7.jar` from Maven Central, checking each SHA-1. It then compiles, writes `out/batik-js-1.7.jar`, and checks that it is identical to the reference jar, entry by entry and as a whole file. The compile step is:
 
 ```sh
 find src toolsrc xmlimplsrc deprecatedsrc -name '*.java' > files.txt
@@ -89,5 +89,5 @@ Everything this project started from:
 
 This artifact stays exactly Batik's 1.7 engine. For recording what scripts change in Java objects
 (which rule and line, which property, old value → new value, and which service calls it made),
-use [`batik-js-lens`](https://github.com/rhino-lens/batik-js-lens), an opt-in library that builds
+use [`rhino-lens`](https://github.com/rhino-lens/rhino-lens), an opt-in library that builds
 on this one without changing any of its classes.

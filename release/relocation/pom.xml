@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Relocation only: this artifact was renamed to io.github.rhino-lens:batik-js:1.7. -->
+  <groupId>io.github.rhino-lens</groupId>
+  <artifactId>batik-js-lens-base</artifactId>
+  <version>1.7.1</version>
+  <packaging>pom</packaging>
+
+  <name>batik-js-lens-base (moved to batik-js)</name>
+  <description>Batik 1.7's Rhino, byte-identical to org.apache.xmlgraphics:batik-js:1.7. Renamed: use io.github.rhino-lens:batik-js:1.7.</description>
+  <url>https://github.com/rhino-lens/batik-js</url>
+
+  <licenses>
+    <license>
+      <name>Mozilla Public License, Version 1.1</name>
+      <url>https://www.mozilla.org/en-US/MPL/1.1/</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>GNU General Public License, Version 2.0 or later</name>
+      <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>Vothla</id>
+      <name>Santhosh Kumar S</name>
+      <url>https://github.com/Vothla</url>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/rhino-lens/batik-js.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/rhino-lens/batik-js.git</developerConnection>
+    <url>https://github.com/rhino-lens/batik-js</url>
+  </scm>
+
+  <distributionManagement>
+    <relocation>
+      <groupId>io.github.rhino-lens</groupId>
+      <artifactId>batik-js</artifactId>
+      <version>1.7</version>
+      <message>Renamed to io.github.rhino-lens:batik-js:1.7 (same content, byte-identical jar).</message>
+    </relocation>
+  </distributionManagement>
+</project>

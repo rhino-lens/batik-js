@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build batik-js-lens-base and verify it against org.apache.xmlgraphics:batik-js:1.7.
+# Build batik-js and verify it against org.apache.xmlgraphics:batik-js:1.7.
 #
 # Requires:
 #   JDK142   an installed Sun J2SDK 1.4.2_12 (with lib/tools.jar and jre/lib/rt.jar unpacked)
@@ -9,7 +9,7 @@
 # Java 9+ `java`: the 1.4.2_12 compiler (tools.jar) then runs on it, compiling against
 # 1.4.2_12's rt.jar. Both give byte-identical classes.
 #
-# Output: out/batik-js-lens-base-1.7.jar, byte-identical to batik-js-1.7.jar (the build fails otherwise)
+# Output: out/batik-js-1.7.jar, byte-identical to batik-js-1.7.jar (the build fails otherwise)
 #
 # MODE=report keeps the same recipe but only lists entries that differ from batik-js-1.7.jar,
 # for work that changes Rhino on purpose. See RECIPE.md for every detail of the recipe.
@@ -47,4 +47,4 @@ javac142 -nowarn -g:none -source 1.3 -target 1.3 \
   -classpath "$XMLBEANS:$STAX" -d "$CLASSES" @"$OUT/files.txt"
 
 REPORT=(); [ "${MODE:-verify}" = report ] && REPORT=(--report)
-python3 -I provenance/package_and_verify.py "${REPORT[@]+"${REPORT[@]}"}" . "$CLASSES" "$OUT/batik-js-lens-base-1.7.jar" "$REFERENCE"
+python3 -I provenance/package_and_verify.py "${REPORT[@]+"${REPORT[@]}"}" . "$CLASSES" "$OUT/batik-js-1.7.jar" "$REFERENCE"

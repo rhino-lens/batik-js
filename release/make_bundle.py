@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Make the Maven Central Portal upload bundle for io.github.rhino-lens:batik-js-lens-base.
+"""Make the Maven Central Portal upload bundle for io.github.rhino-lens:batik-js.
 
-Writes, under <out>/bundle/io/github/rhino-lens/batik-js-lens-base/<version>/:
+Writes, under <out>/bundle/io/github/rhino-lens/batik-js/<version>/:
   the jar (from build.sh), a sources jar, a javadoc jar (from <javadoc-dir>) and the POM,
   each with .md5 and .sha1 files and, if GPG_KEY is set, a detached .asc signature.
 Then zips that tree into <out>/central-bundle.zip, ready for "Publish Component" upload.
@@ -10,7 +10,7 @@ Usage: make_bundle.py <repo-root> <out-dir> <javadoc-dir>
 """
 import hashlib, os, subprocess, sys, zipfile
 
-GROUP, ARTIFACT, VERSION = "io.github.rhino-lens", "batik-js-lens-base", "1.7"
+GROUP, ARTIFACT, VERSION = "io.github.rhino-lens", "batik-js", "1.7"
 TIMESTAMP = (2007, 11, 13, 21, 51, 22)
 SOURCE_DIRS = ("src", "toolsrc", "xmlimplsrc", "deprecatedsrc")
 
