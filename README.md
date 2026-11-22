@@ -1,4 +1,4 @@
-# batik-js-lens
+# batik-js-lens-base
 
 The exact Mozilla Rhino JavaScript engine shipped in Apache Batik 1.7 (`org.apache.xmlgraphics:batik-js:1.7`), rebuilt from public source and published under `io.github.rhino-lens`.
 
@@ -9,7 +9,7 @@ The exact Mozilla Rhino JavaScript engine shipped in Apache Batik 1.7 (`org.apac
 ```xml
 <dependency>
   <groupId>io.github.rhino-lens</groupId>
-  <artifactId>batik-js-lens</artifactId>
+  <artifactId>batik-js-lens-base</artifactId>
   <version>1.7</version>
 </dependency>
 ```
@@ -45,7 +45,7 @@ You need Sun J2SDK **1.4.2_12** (the jar's manifest says `Created-By: 1.4.2_12-b
 JDK142=/path/to/j2sdk1.4.2_12 ./build.sh
 ```
 
-[`build.sh`](build.sh) downloads `xmlbeans-2.3.0.jar` and `stax-api-1.0.1.jar` (for E4X) and the reference `batik-js-1.7.jar` from Maven Central, checking each SHA-1. It then compiles, writes `out/batik-js-lens-1.7.jar`, and checks that it is identical to the reference jar, entry by entry and as a whole file. The compile step is:
+[`build.sh`](build.sh) downloads `xmlbeans-2.3.0.jar` and `stax-api-1.0.1.jar` (for E4X) and the reference `batik-js-1.7.jar` from Maven Central, checking each SHA-1. It then compiles, writes `out/batik-js-lens-base-1.7.jar`, and checks that it is identical to the reference jar, entry by entry and as a whole file. The compile step is:
 
 ```sh
 find src toolsrc xmlimplsrc deprecatedsrc -name '*.java' > files.txt
@@ -83,6 +83,9 @@ Everything this project started from:
 | Compiler (Sun J2SDK 1.4.2_12) | [Oracle Java SE 1.4 archive](https://www.oracle.com/java/technologies/java-archive-javase-v14-downloads.html) |
 | E4X compile dependencies | [`xmlbeans:2.3.0`](https://repo1.maven.org/maven2/org/apache/xmlbeans/xmlbeans/2.3.0/), [`stax-api:1.0.1`](https://repo1.maven.org/maven2/stax/stax-api/1.0.1/) |
 
-## Roadmap
+## Observability
 
-Opt-in hooks for observing and debugging the scripts Rhino executes, kept separate from the unchanged 1.7 baseline.
+This artifact stays exactly Batik's 1.7 engine. For recording what scripts change in Java objects
+(which rule and line, which property, old value → new value, and which service calls it made),
+use [`batik-js-lens`](https://github.com/rhino-lens/batik-js-lens), an opt-in library that builds
+on this one without changing any of its classes.

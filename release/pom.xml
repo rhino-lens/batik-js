@@ -5,17 +5,17 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.github.rhino-lens</groupId>
-  <artifactId>batik-js-lens</artifactId>
+  <artifactId>batik-js-lens-base</artifactId>
   <version>1.7</version>
   <packaging>jar</packaging>
 
-  <name>batik-js-lens</name>
+  <name>batik-js-lens-base</name>
   <description>
     The exact Mozilla Rhino engine shipped in Apache Batik 1.7 (org.apache.xmlgraphics:batik-js:1.7),
     rebuilt from public source. All classes and resources are byte-identical to batik-js 1.7.
     Not affiliated with or endorsed by the Apache Software Foundation or Mozilla.
   </description>
-  <url>https://github.com/rhino-lens/batik-js-lens</url>
+  <url>https://github.com/rhino-lens/batik-js-lens-base</url>
 
   <licenses>
     <license>
@@ -31,7 +31,7 @@
     </license>
     <license>
       <name>BSD 3-Clause License (Sun Microsystems TreeTable sources)</name>
-      <url>https://github.com/rhino-lens/batik-js-lens/blob/main/LICENSE.txt</url>
+      <url>https://github.com/rhino-lens/batik-js-lens-base/blob/main/LICENSE.txt</url>
       <distribution>repo</distribution>
       <comments>Applies to org.mozilla.javascript.tools.debugger.downloaded only.</comments>
     </license>
@@ -46,9 +46,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:https://github.com/rhino-lens/batik-js-lens.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/rhino-lens/batik-js-lens.git</developerConnection>
-    <url>https://github.com/rhino-lens/batik-js-lens</url>
+    <connection>scm:git:https://github.com/rhino-lens/batik-js-lens-base.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/rhino-lens/batik-js-lens-base.git</developerConnection>
+    <url>https://github.com/rhino-lens/batik-js-lens-base</url>
     <tag>v1.7</tag>
   </scm>
 
